@@ -1,27 +1,33 @@
+def checkio(expression):
+    list_backets = []
+    
 
-while True:
-    s = input("Введите оператор (+, -, *, / или stop (стоп) для остановки программы): ")
-    if s == 'stop' or s == 'стоп':
-        print("Программа остановлена")
-        break
-    if s in ('+', '-', '*', '/'):
-        while True:
-            try:
-                n1 = int(input("Введите первое число = "))
-                n2 = int(input("Введите второе число = "))
-                break
-            except ValueError:
-                print("Программа работает только с числами!")
-        if s == '+':
-            print("Oтвет:",('{} + {} ='.format(n1, n2)),(n1+n2))
-        elif s == '-':
-            print("Oтвет:",('{} - {} ='.format(n1, n2)),(n1-n2))
-        elif s == '*':
-            print("Oтвет:",('{} * {} ='.format(n1, n2)),(n1*n2))
-        elif s == '/':
-            if n2 != 0:
-                print("Oтвет:",('{} / {} ='.format(n1, n2)),(n1/n2))
-            else:
-                print("Деление на ноль нельзя!")
-    else:
-        print("Вы ввели неправильный оператор! Повторите попытку.")
+    for i in expression:
+        if character in "[](){}{}":
+            list_backets.append(i)
+    if len(list_backets) == 0: 
+        return True
+
+    elif all(brackets.count(opening) == brackets.count(closing)
+             for opening, closing in zip("[({", "])}")):
+        j = 0
+        try:
+            while j != len(brackets):
+                if list_backets[j] == "(" and list_backets[j+1] == ")":
+                    list_backets.pop(j)
+                    list_backets.pop(j)
+                    j = 0
+                elif list_backets[j] == "{" and list_backets[j+1] == "}":
+                    list_backets.pop(j)
+                    list_backets.pop(j)
+                    j = 0
+                elif list_backets[j] == "[" and list_backets[j+1] == "]":
+                    list_backets.pop(j)
+                    list_backets.pop(j)
+                    j = 0
+                else:
+                    j += 1
+
+        except:
+            return (not list_brackets)
+        return False
